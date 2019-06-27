@@ -28,12 +28,6 @@ class UpdateBooking(RetrieveUpdateAPIView):
 	lookup_field = 'id'
 	lookup_url_kwarg = 'booking_id'
 
-	def get_serializer_class(self):
-		if self.request.method == 'GET':
-			print('get')
-			return BookingDetailsSerializer
-		return UpdateBookingSerializer
-
 
 class CancelBooking(DestroyAPIView):
 	queryset = Booking.objects.all()
