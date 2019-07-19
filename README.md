@@ -7,6 +7,6 @@
       * password
       * last name
       * first name
-    * Create a `URL` for this view and test it in `postman`.
+    * Create a `URL` for this view with namne `register` and test it in `postman`.
     * Replace the api in the **frontends** `register_view` view with this api.
 7. Push your code
