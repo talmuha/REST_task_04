@@ -169,7 +169,7 @@ class Login(APITestCase):
 
 	def test_unsucceful_login(self):
 		response = self.client.post(reverse('login'), {"username" : "laila", "password": "1234567890-=1"})
-		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+		self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class BookingCreate(APITestCase):
@@ -193,7 +193,7 @@ class BookingCreate(APITestCase):
 
 	def test_url_works(self):
 		response = self.client.post(reverse('login'), self.user_data)
-		self.client.credentials(HTTP_AUTHORIZATION='JWT ' + response.data['token'])
+		self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + response.data['access'])
 
 		response = self.client.post(reverse('book-flight', args=[1]), self.data)
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -201,7 +201,7 @@ class BookingCreate(APITestCase):
 
 	def test_creation_works(self):
 		response = self.client.post(reverse('login'), self.user_data)
-		self.client.credentials(HTTP_AUTHORIZATION='JWT ' + response.data['token'])
+		self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + response.data['access'])
 
 		user = User.objects.get(id=1)
 
